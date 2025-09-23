@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
 import { Event, EventsType } from '@/payload-types'
 import { formatDate } from '../_utils/formatDate'
 import { AddEventButton } from './AddEventButton'
@@ -35,7 +36,8 @@ export const CalendarCard = ({ taskEvents, customEvents, eventsTypes }: Calendar
                   <p className="text-muted-foreground text-sm">
                     {formatDate(event['completed-at']!)}
                   </p>
-                  {/* @ts-ignore */}
+                  {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                  {/* @ts-expect-error */}
                   <Label htmlFor={`${event.id}`}>{event['event-type']?.title}</Label>
                 </div>
               </div>
