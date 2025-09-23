@@ -79,7 +79,8 @@ export const EventCheckbox = ({ event }: EventCheckboxProps) => {
         </DialogContent>
       </Dialog>
       <div className="grid gap-2">
-        {/* @ts-ignore */}
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-expect-error */}
         <Label htmlFor={`${event.id}`}>{event.routine.title}</Label>
         <p className="text-muted-foreground text-sm">
           {formatTime(event['scheduled-for']!)}
