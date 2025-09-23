@@ -1,6 +1,6 @@
+import { FlatCompat } from '@eslint/eslintrc'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -10,8 +10,15 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...compat.extends(
+    'next/core-web-vitals',
+    'next/typescript',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'prettier', // always keep prettier LAST
+  ),
   {
+    plugins: ['import'],
     rules: {
       '@typescript-eslint/ban-ts-comment': 'warn',
       '@typescript-eslint/no-empty-object-type': 'warn',
@@ -28,6 +35,32 @@ const eslintConfig = [
           caughtErrorsIgnorePattern: '^(_|ignore)',
         },
       ],
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin', // Node.js built-ins
+            'external', // npm packages
+            'internal', // aliases like @app/**
+            ['parent', 'sibling', 'index'], // relative
+            'object',
+            'type',
+          ],
+          pathGroups: [
+            { pattern: 'react', group: 'external', position: 'before' },
+            { pattern: 'next/**', group: 'external', position: 'after' },
+            { pattern: '@app/**', group: 'internal', position: 'before' },
+          ],
+          pathGroupsExcludedImportTypes: ['react', 'builtin'],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc', caseInsensitive: true },
+        },
+      ],
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {},
+      },
     },
   },
   {

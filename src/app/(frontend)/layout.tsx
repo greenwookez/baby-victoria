@@ -1,4 +1,6 @@
-import React from 'react'
+import { PropsWithChildren } from 'react'
+import { initPayload } from './_utils/initPayload'
+import { RootLayoutClientWrapper } from './client.layout'
 import './styles.css'
 
 export const metadata = {
@@ -6,14 +8,8 @@ export const metadata = {
   title: 'Payload Blank Template',
 }
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
-  const { children } = props
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const { user } = await initPayload()
 
-  return (
-    <html lang="en">
-      <body>
-        <main>{children}</main>
-      </body>
-    </html>
-  )
+  return <RootLayoutClientWrapper user={user}>{children}</RootLayoutClientWrapper>
 }

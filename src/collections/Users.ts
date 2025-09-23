@@ -18,7 +18,9 @@ export const Users: CollectionConfig = {
       return user?.role === UserRoleAdmin
     },
   },
-  auth: true,
+  auth: {
+    tokenExpiration: 60 * 60 * 24 * 365,
+  },
   fields: [
     {
       name: 'role',
