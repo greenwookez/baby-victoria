@@ -19,7 +19,7 @@ export const PopulateEvents = async (Input: PopulateEventsInput) => {
 
   const startOfToday = new Date()
   startOfToday.setHours(0, 0, 0, 0)
-  const dates = rule.between(startOfToday, new Date('2030-12-31T23:59:59Z'), true)
+  const dates = rule.between(startOfToday, new Date('2026-12-31T23:59:59Z'), true)
 
   await Promise.all(
     dates.map((date) =>
