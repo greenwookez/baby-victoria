@@ -4,15 +4,15 @@ import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { fileURLToPath } from 'url'
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
-import { Routines } from './collections/Routines'
 import { Events } from './collections/Events'
 import { EventsTypes } from './collections/EventsTypes'
 import { Measurements } from './collections/Measurements'
+import { Media } from './collections/Media'
+import { Routines } from './collections/Routines'
+import { Users } from './collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,6 +32,7 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
+      ssl: { rejectUnauthorized: false },
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
