@@ -58,14 +58,14 @@ export const RootLayoutClientWrapper = ({
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <Link href="/test/client2" prefetch={false}>
-                      Client 2
-                    </Link>
+                    <Link href="/test/client2">Client 2</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <Link href="/test/server1">Server 1</Link>
+                    <Link href="/test/server1" prefetch>
+                      Server 1
+                    </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
