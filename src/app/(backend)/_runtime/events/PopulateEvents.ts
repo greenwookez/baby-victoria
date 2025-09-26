@@ -21,16 +21,14 @@ export const PopulateEvents = async (Input: PopulateEventsInput) => {
   startOfToday.setHours(0, 0, 0, 0)
   const dates = rule.between(startOfToday, new Date('2026-12-31T23:59:59Z'), true)
 
-  await Promise.all(
-    dates.map((date) =>
-      payload.create({
-        collection: 'events',
-        data: {
-          user: Input.UserID,
-          routine: Input.RoutineID,
-          'scheduled-for': date.toISOString(),
-        },
-      }),
-    ),
+  dates.map((date) =>
+    payload.create({
+      collection: 'events',
+      data: {
+        user: Input.UserID,
+        routine: Input.RoutineID,
+        'scheduled-for': date.toISOString(),
+      },
+    }),
   )
 }
