@@ -89,7 +89,16 @@ export default function HomePageUI(props: HomePageUIProps) {
             key={task.id}
             task={task}
             onChecked={async (checked) => {
-              await UpdateEvent({ EventID: task.id, CompletedAt: checked ? new Date() : null })
+              const eventDate = new Date(date)
+              const now = new Date()
+              eventDate.setHours(
+                now.getHours(),
+                now.getMinutes(),
+                now.getSeconds(),
+                now.getMilliseconds(),
+              )
+
+              await UpdateEvent({ EventID: task.id, CompletedAt: checked ? eventDate : null })
               reload()
             }}
             onChange={async (newDate) => {
@@ -106,7 +115,15 @@ export default function HomePageUI(props: HomePageUIProps) {
               {eventType.title}
               <Button
                 onClick={async () => {
-                  await CreateEvent({ EventTypeID: eventType.id, Date: new Date() })
+                  const eventDate = new Date(date)
+                  const now = new Date()
+                  eventDate.setHours(
+                    now.getHours(),
+                    now.getMinutes(),
+                    now.getSeconds(),
+                    now.getMilliseconds(),
+                  )
+                  await CreateEvent({ EventTypeID: eventType.id, Date: eventDate })
                   reload()
                 }}
               >
