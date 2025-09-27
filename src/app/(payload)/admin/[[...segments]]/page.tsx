@@ -16,7 +16,6 @@ type Args = {
 }
 
 export const generateMetadata = ({ params, searchParams }: Args): Promise<Metadata> => {
-  console.log('DB URI:', process.env.DATABASE_URI)
   return generatePageMetadata({ config, params, searchParams })
 }
 

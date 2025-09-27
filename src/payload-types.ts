@@ -175,6 +175,7 @@ export interface Routine {
   title: string;
   rrule: string;
   user: number | User;
+  is_deleted?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -339,6 +340,7 @@ export interface RoutinesSelect<T extends boolean = true> {
   title?: T;
   rrule?: T;
   user?: T;
+  is_deleted?: T;
   updatedAt?: T;
   createdAt?: T;
 }

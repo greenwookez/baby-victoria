@@ -22,5 +22,10 @@ export const Routines: CollectionConfig = {
       relationTo: 'users',
       required: true,
     },
+    {
+      name: 'is_deleted',
+      type: 'checkbox',
+      defaultValue: false,
+    },
   ],
 }

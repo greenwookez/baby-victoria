@@ -7,6 +7,7 @@ export type PopulateEventsInput = {
   RoutineID: number
   RRule: string
   UserID: number
+  StartingFrom?: Date
 }
 
 export const PopulateEvents = async (Input: PopulateEventsInput) => {
@@ -15,20 +16,27 @@ export const PopulateEvents = async (Input: PopulateEventsInput) => {
     return
   }
 
-  const rule = RRule.fromString(Input.RRule)
-
   const startOfToday = new Date()
-  startOfToday.setHours(0, 0, 0, 0)
-  const dates = rule.between(startOfToday, new Date('2026-12-31T23:59:59Z'), true)
+  startOfToday.setUTCHours(0, 0, 0, 0)
 
-  dates.map((date) =>
-    payload.create({
-      collection: 'events',
-      data: {
-        user: Input.UserID,
-        routine: Input.RoutineID,
-        'scheduled-for': date.toISOString(),
-      },
-    }),
-  )
+  const dtstart = Input.StartingFrom ?? startOfToday
+
+  const rule = new RRule({
+    ...RRule.parseString(Input.RRule),
+    dtstart,
+  })
+
+  const dates = rule.between(dtstart, new Date(Date.UTC(2026, 11, 31, 23, 59, 59)), true)
+  setTimeout(() => {
+    for (const date of dates) {
+      payload.create({
+        collection: 'events',
+        data: {
+          user: Input.UserID,
+          routine: Input.RoutineID,
+          'scheduled-for': date.toISOString(),
+        },
+      })
+    }
+  })
 }

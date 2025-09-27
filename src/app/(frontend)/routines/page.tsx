@@ -1,11 +1,10 @@
 import { headers as getHeaders } from 'next/headers.js'
 import { getPayload } from 'payload'
-import React from 'react'
 
-import config from '@/payload.config'
-import { RoutinesTable } from './RoutinesTable'
 import { Button } from '@/components/ui/button'
+import config from '@/payload.config'
 import Link from 'next/link'
+import { RoutinesTable } from './RoutinesTable'
 
 export default async function RoutinesPage() {
   const headers = await getHeaders()
@@ -18,7 +17,9 @@ export default async function RoutinesPage() {
 
   const routines = await payload.find({
     collection: 'routines',
+    pagination: false,
     where: {
+      is_deleted: { equals: false },
       user: {
         equals: user.id,
       },

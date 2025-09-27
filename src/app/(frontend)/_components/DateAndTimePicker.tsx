@@ -53,6 +53,6 @@ export function DateAndTimePicker({ date, onChange }: DateAndTimePickerProps) {
   )
 }
 
-function pad(n: number) {
+export function pad(n: number) {
   return String(n).padStart(2, '0')
 }

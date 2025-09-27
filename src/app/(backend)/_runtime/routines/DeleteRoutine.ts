@@ -24,9 +24,12 @@ export const DeleteRoutine = async (Input: DeleteRoutineInput) => {
     return Response.json({ message: 'Unauthorized' }, { status: 403 })
   }
 
-  await payload.delete({
+  await payload.update({
     collection: 'routines',
     id: Input.RoutineID,
+    data: {
+      is_deleted: true,
+    },
   })
 
   const date = new Date()
@@ -40,6 +43,7 @@ export const DeleteRoutine = async (Input: DeleteRoutineInput) => {
   await payload.delete({
     collection: 'events',
     where: {
+      routine: { equals: Input.RoutineID },
       'scheduled-for': {
         greater_than: EOD.toISOString(),
       },

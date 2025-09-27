@@ -1,24 +1,27 @@
 'use client'
 
-import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Label } from '@/components/ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { ChevronDownIcon } from 'lucide-react'
+import { useState } from 'react'
 
 export type DatePickerProps = {
   date?: Date
   onChange?: (date: Date | undefined) => void
+  noLabel?: boolean
 }
 
-export const DatePicker = ({ date, onChange }: DatePickerProps) => {
+export const DatePicker = ({ date, onChange, noLabel }: DatePickerProps) => {
   const [open, setOpen] = useState(false)
   return (
     <div className="flex flex-col gap-3 w-[100%]">
-      <Label htmlFor="date-picker" className="px-1">
-        Date
-      </Label>
+      {!noLabel && (
+        <Label htmlFor="date-picker" className="px-1">
+          Date
+        </Label>
+      )}
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button

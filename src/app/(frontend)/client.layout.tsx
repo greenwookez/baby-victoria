@@ -39,47 +39,29 @@ export const RootLayoutClientWrapper = ({
                   <>
                     <NavigationMenuItem>
                       <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                        <Link href="/">Calendar</Link>
+                        <Link href="/" prefetch>
+                          Calendar
+                        </Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                       <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                        <Link href="/routines">Routines</Link>
+                        <Link href="/routines" prefetch>
+                          Routines
+                        </Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
                   </>
                 )}
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <Link href="/test/client1" prefetch>
-                      Client 1
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <Link href="/test/client2">Client 2</Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <Link href="/test/server1" prefetch>
-                      Server 1
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <Link href="/test/server2">Server 2</Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
 
             <div className="flex items-center gap-3">
               {!user ? (
                 <Button variant="outline" asChild>
-                  <Link href="/auth/sign-in">Sign In</Link>
+                  <Link href="/auth/sign-in" prefetch>
+                    Sign In
+                  </Link>
                 </Button>
               ) : (
                 <>

@@ -49,6 +49,7 @@ export const UpdateRoutine = async (Input: UpdateRoutineInput): Promise<Routine 
     await payload.delete({
       collection: 'events',
       where: {
+        routine: { equals: Input.RoutineID },
         'scheduled-for': {
           greater_than: EOD.toISOString(),
         },
@@ -59,6 +60,7 @@ export const UpdateRoutine = async (Input: UpdateRoutineInput): Promise<Routine 
       RoutineID: Input.RoutineID,
       RRule: Input.RRule,
       UserID: user.id,
+      StartingFrom: EOD,
     })
   }
 

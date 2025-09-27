@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload'
 
 export const Events: CollectionConfig = {
   slug: 'events',
+  lockDocuments: false,
   fields: [
     {
       name: 'user',
