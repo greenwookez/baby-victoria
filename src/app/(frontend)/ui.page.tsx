@@ -29,7 +29,7 @@ export default function HomePageUI(props: HomePageUIProps) {
   const [isLoading, setIsLoading] = useState(false)
 
   const age = useMemo(() => {
-    const birthDate = new Date(2025, 8, 5, 14, 24)
+    const birthDate = new Date(2025, 8, 5, 0, 0)
     const diffMs = date.getTime() - birthDate.getTime()
     if (diffMs < 0) return 'ещё не родился'
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
@@ -139,6 +139,7 @@ export default function HomePageUI(props: HomePageUIProps) {
                     <WithChangeTimeDialog
                       date={new Date(event['completed-at']!)}
                       onChange={async (newDate) => {
+                        console.log(newDate)
                         await UpdateEvent({ EventID: event.id, CompletedAt: newDate })
                         reload()
                       }}

@@ -14,6 +14,9 @@ export const UpdateEvent = async (Input: UpdateEventInput) => {
     return
   }
 
+  console.log('UpdateEvent: Input.CompletedAt.toString()', Input.CompletedAt?.toString())
+  console.log('UpdateEvent: Input.CompletedAt.toISOString()', Input.CompletedAt?.toISOString())
+
   await payload.update({
     collection: 'events',
     id: Input.EventID,

@@ -36,6 +36,12 @@ export const LoadEventsForCalendar = async (ForDate: string): Promise<CalendarDa
   const startDt = startOfDayInTimeZone(timezone, year, month, day)
   const endDt = endOfDayInTimeZone(timezone, year, month, day)
 
+  console.log('LoadEventsForCalendar: server tz', Intl.DateTimeFormat().resolvedOptions().timeZone)
+  console.log('LoadEventsForCalendar: startDt.toString()', startDt.toString())
+  console.log('LoadEventsForCalendar: startDt.toISOString()', startDt.toISOString())
+  console.log('LoadEventsForCalendar: endDt.toString()', endDt.toString())
+  console.log('LoadEventsForCalendar: endDt.toISOString()', endDt.toISOString())
+
   const nonDeletedRoutines = await payload.find({
     collection: 'routines',
     where: { is_deleted: { equals: false } },
