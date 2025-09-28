@@ -8,7 +8,6 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
-import { Separator } from '@/components/ui/separator'
 import { User } from '@/payload-types'
 import Link from 'next/link'
 import { PropsWithChildren, useEffect } from 'react'
@@ -64,18 +63,12 @@ export const RootLayoutClientWrapper = ({
                   </Link>
                 </Button>
               ) : (
-                <>
-                  <span className="text-sm font-semibold text-muted-foreground">
-                    Welcome back, {user.email}
-                  </span>
-                  <Separator orientation="vertical" className="h-6" />
-                  <SignOutButton />
-                </>
+                <SignOutButton />
               )}
             </div>
           </div>
         </nav>
-        <main className="flex items-center justify-center min-h-[calc(100%-50px)] pl-3 pr-3">
+        <main className="flex justify-center min-h-[calc(100%-50px)] pl-3 pr-3 w-full">
           {children}
         </main>
       </body>

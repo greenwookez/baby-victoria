@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
   --font-mono: 'Roboto Mono', monospace;
 }
@@ -21,7 +23,7 @@ body,
 }
 
 body {
-  font-family: system-ui;
+  font-family: Geist, system-ui;
   font-size: 18px;
   line-height: 32px;
 
