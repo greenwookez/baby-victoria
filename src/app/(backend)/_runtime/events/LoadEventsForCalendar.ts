@@ -1,8 +1,7 @@
 'use server'
 
 import { Event } from '@/payload-types'
-import { endOfDayInTimeZone } from '../../_utils/endOfDayInTimezone'
-import { startOfDayInTimeZone } from '../../_utils/startOfDayInTimezone'
+import { getDayBounds } from '../../_utils/getDayBounds'
 import { authorize } from '../../apiv1/_authorize'
 
 export type CalendarDay = {
@@ -27,14 +26,7 @@ export const LoadEventsForCalendar = async (ForDate: string): Promise<CalendarDa
   const { user, payload, timezone } = await authorize()
   if (!user) return null
 
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(ForDate)
-  if (!match) return null
-  const year = Number(match[1])
-  const month = Number(match[2])
-  const day = Number(match[3])
-
-  const startDt = startOfDayInTimeZone(timezone, year, month, day)
-  const endDt = endOfDayInTimeZone(timezone, year, month, day)
+  const { start: startDt, end: endDt } = getDayBounds(ForDate, timezone)
 
   console.log('LoadEventsForCalendar: server tz', Intl.DateTimeFormat().resolvedOptions().timeZone)
   console.log('LoadEventsForCalendar: startDt.toString()', startDt.toString())

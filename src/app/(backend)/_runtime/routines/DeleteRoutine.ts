@@ -1,6 +1,7 @@
 'use server'
 
-import { endOfDayInTimeZone } from '@/app/(backend)/_utils/endOfDayInTimezone'
+import { getDayBounds } from '@/app/(backend)/_utils/getDayBounds'
+import { DateTime } from 'luxon'
 import { revalidatePath } from 'next/cache'
 import { authorize } from '../../apiv1/_authorize'
 
@@ -32,12 +33,9 @@ export const DeleteRoutine = async (Input: DeleteRoutineInput) => {
     },
   })
 
-  const date = new Date()
-  const EOD = endOfDayInTimeZone(
+  const { end: EOD } = getDayBounds(
+    DateTime.now().setZone(Input.Timezone).toFormat('yyyy-MM-dd'),
     Input.Timezone,
-    date.getFullYear(),
-    date.getMonth() + 1,
-    date.getDate(),
   )
 
   await payload.delete({
